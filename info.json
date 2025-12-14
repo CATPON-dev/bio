@@ -27,7 +27,7 @@
   "projects": [
     {
       "name": "TeaHost",
-      "desc": "Хостинг юзерботов. (на данный момент закрыт)",
+      "desc": "Хостинг юзерботов. (на данный момент закрыт) да сука",
       "icon": "fa-solid fa-mug-hot",
       "links": [
         {"label": "Канал", "url": "https://t.me/TeaHostChannel"},
