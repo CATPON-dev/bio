@@ -1,1 +1,57 @@
-
+{
+  "socials": {
+    "telegram": "https://t.me/EXPERT_CATPON",
+    "github": "https://github.com/CATPON-dev",
+    "email": "mailto:catpondev@gmail.com"
+  },
+  "stack": [
+    "Python",
+    "Aiogram",
+    "HTML/CSS",
+    "SQL"
+  ],
+  "hobbies": [
+    {
+      "name": "Аниме",
+      "icon": "fa-solid fa-tv"
+    },
+    {
+      "name": "Кодинг",
+      "icon": "fa-solid fa-terminal"
+    },
+    {
+      "name": "Музыка",
+      "icon": "fa-solid fa-music"
+    }
+  ],
+  "projects": [
+    {
+      "name": "TeaHost",
+      "desc": "Хостинг юзерботов. (на данный момент закрыт)",
+      "icon": "fa-solid fa-mug-hot",
+      "links": [
+        {"label": "Канал", "url": "https://t.me/TeaHostChannel"},
+        {"label": "Статус", "url": "https://t.me/TeaHostStatus"},
+        {"label": "Отзывы", "url": "https://t.me/TeaHostReviews"}
+      ]
+    },
+    {
+      "name": "MDK-Panels",
+      "desc": "Сайт предоставляет панель-управление для своего ПО.",
+      "icon": "fa-solid fa-gauge-high",
+      "links": [
+        {"label": "Сайт", "url": "https://modkey.space"},
+        {"label": "Канал", "url": "https://t.me/mdk_space"}
+      ]
+    },
+    {
+      "name": "Legion-Panel",
+      "desc": "Сайт предоставляет панель-управление для своего ПО.",
+      "icon": "fa-solid fa-shield-halved",
+      "links": [
+        {"label": "Сайт", "url": "https://legionpanel.site/"},
+        {"label": "Канал", "url": "https://t.me/LegionPanel"}
+      ]
+    }
+  ]
+}
