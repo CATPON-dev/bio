@@ -5,7 +5,7 @@
     "email": "mailto:catpondev@gmail.com"
   },
   "stack": [
-    "Python",
+    "Python тест",
     "Aiogram",
     "HTML/CSS",
     "SQL"
@@ -27,7 +27,7 @@
   "projects": [
     {
       "name": "TeaHost",
-      "desc": "Хостинг юзерботов. (на данный момент закрыт) да сука",
+      "desc": "Хостинг юзерботов. (на данный момент закрыт)",
       "icon": "fa-solid fa-mug-hot",
       "links": [
         {"label": "Канал", "url": "https://t.me/TeaHostChannel"},
