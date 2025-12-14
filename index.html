@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CATPON | Developer</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+    <div id="loader" class="loader-overlay">
+        <div class="cube-loader">
+            <div class="side front"></div>
+            <div class="side back"></div>
+            <div class="side right"></div>
+            <div class="side left"></div>
+            <div class="side top"></div>
+            <div class="side bottom"></div>
+        </div>
+        <p>LOADING...</p>
+    </div>
+
+    <div class="background-3d">
+        <div class="cube cube-1">
+            <div class="face front"></div>
+            <div class="face back"></div>
+            <div class="face right"></div>
+            <div class="face left"></div>
+            <div class="face top"></div>
+            <div class="face bottom"></div>
+        </div>
+        <div class="cube cube-2">
+            <div class="face front"></div>
+            <div class="face back"></div>
+            <div class="face right"></div>
+            <div class="face left"></div>
+            <div class="face top"></div>
+            <div class="face bottom"></div>
+        </div>
+        <div class="cube cube-3">
+            <div class="face front"></div>
+            <div class="face back"></div>
+            <div class="face right"></div>
+            <div class="face left"></div>
+            <div class="face top"></div>
+            <div class="face bottom"></div>
+        </div>
+    </div>
+
+    <main class="container">
+        <section class="card profile-card tilt-effect">
+            <div class="card-face">
+                <div class="avatar-holder">
+                    <img id="profile-avatar" src="https://ui-avatars.com/api/?name=CP&background=3b82f6&color=fff&size=128" alt="Avatar" class="avatar-img">
+                    <div class="status-indicator"></div>
+                </div>
+                <div class="profile-info">
+                    <h1 id="profile-name">CATPON</h1>
+                    <p class="role" id="profile-desc">Loading...</p>
+                    
+                    <div class="social-row">
+                        <a id="link-tg" href="#" target="_blank" class="btn-3d telegram">
+                            <i class="fa-brands fa-telegram"></i>
+                            <span class="btn-shadow"></span>
+                        </a>
+                        <a id="link-gh" href="#" target="_blank" class="btn-3d github">
+                            <i class="fa-brands fa-github"></i>
+                            <span class="btn-shadow"></span>
+                        </a>
+                        <a id="link-mail" href="#" class="btn-3d email">
+                            <i class="fa-solid fa-envelope"></i>
+                            <span class="btn-shadow"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="card skills-card tilt-effect">
+            <div class="card-face">
+                <h2 class="floating-title"><i class="fa-solid fa-layer-group"></i> Tech Stack</h2>
+                <div class="tags" id="stack-container">
+                </div>
+            </div>
+        </section>
+
+        <section class="card hobby-card tilt-effect">
+            <div class="card-face">
+                <h2 class="floating-title"><i class="fa-regular fa-star"></i> Хобби</h2>
+                <div class="hobby-table" id="hobbies-container">
+                </div>
+            </div>
+        </section>
+
+        <section class="card projects-card full-width tilt-effect">
+            <div class="card-face">
+                <h2 class="floating-title"><i class="fa-solid fa-folder-open"></i> Проекты</h2>
+                <div class="project-grid" id="projects-container">
+                </div>
+            </div>
+        </section>
+
+        <section class="card timer-card full-width tilt-effect" id="timer-card">
+            <div class="card-face">
+                <div class="timer-header">
+                    <h2 class="floating-title"><i class="fa-solid fa-hourglass-half"></i> До НГ</h2>
+                    <div class="copy-btn-3d" id="copy-feedback">
+                        <i class="fa-regular fa-copy"></i>
+                    </div>
+                </div>
+                
+                <div class="timer-display-3d">
+                    <div class="digit-box">
+                        <span id="d" class="time-num">00</span>
+                        <span class="time-label">ДН</span>
+                    </div>
+                    <div class="separator">:</div>
+                    <div class="digit-box">
+                        <span id="h" class="time-num">00</span>
+                        <span class="time-label">ЧАС</span>
+                    </div>
+                    <div class="separator">:</div>
+                    <div class="digit-box">
+                        <span id="m" class="time-num">00</span>
+                        <span class="time-label">МИН</span>
+                    </div>
+                    <div class="separator">:</div>
+                    <div class="digit-box accent-digit">
+                        <span id="s" class="time-num">00</span>
+                        <span class="time-label">СЕК</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="main.js"></script>
+</body>
+</html>
