@@ -6,9 +6,12 @@
   },
   "stack": [
     "Python",
+    "FastAPI",
     "Aiogram",
+    "JavaScript",
     "HTML/CSS",
-    "SQL"
+    "MySQL",
+    "SQLite"
   ],
   "hobbies": [
     {
