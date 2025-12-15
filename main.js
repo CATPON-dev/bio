@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const githubApiUrl = 'https://api.github.com/repos/CATPON-dev/bio/contents/info.json?ref=main';
 
     const loader = document.getElementById('loader');
+    const mainContainer = document.getElementById('main-container');
     const nameEl = document.getElementById('profile-name');
     const descEl = document.getElementById('profile-desc');
     const avatarEl = document.getElementById('profile-avatar');
@@ -64,6 +65,8 @@ document.addEventListener('DOMContentLoaded', () => {
         } finally {
             setTimeout(() => {
                 loader.classList.add('hidden');
+                document.body.classList.remove('loading');
+                mainContainer.classList.add('loaded');
             }, 500);
         }
     }

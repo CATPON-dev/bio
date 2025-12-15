@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="loading">
     
     <div id="loader" class="loader-overlay">
         <div class="cube-loader">
@@ -52,10 +52,11 @@
         </div>
     </div>
 
-    <main class="container">
+    <main class="container" id="main-container">
         <section class="card profile-card tilt-effect">
             <div class="card-face">
                 <div class="avatar-holder">
+                    <div class="santa-hat"></div>
                     <img id="profile-avatar" src="https://ui-avatars.com/api/?name=CP&background=3b82f6&color=fff&size=128" alt="Avatar" class="avatar-img">
                     <div class="status-indicator"></div>
                 </div>

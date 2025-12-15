@@ -26,18 +26,31 @@ body {
     overflow-x: hidden;
 }
 
+body.loading {
+    overflow: hidden;
+    height: 100vh;
+}
+
 .loader-overlay {
     position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
     background-color: var(--bg-main);
-    z-index: 9999;
+    z-index: 99999;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     transition: opacity 0.5s ease, visibility 0.5s;
 }
-.loader-overlay.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+
+.loader-overlay.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
 
 .cube-loader {
     width: 50px; height: 50px;
@@ -99,6 +112,12 @@ body {
     width: 100%;
     max-width: 650px;
     transform-style: preserve-3d;
+    opacity: 0;
+    transition: opacity 0.8s ease-out;
+}
+
+.container.loaded {
+    opacity: 1;
 }
 
 .card {
@@ -107,18 +126,6 @@ body {
     transform-style: preserve-3d;
     transform: rotateX(0) rotateY(0);
     transition: transform 0.1s ease-out;
-    animation: entryPop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-    opacity: 0;
-}
-.card:nth-child(1) { animation-delay: 0.1s; }
-.card:nth-child(2) { animation-delay: 0.2s; }
-.card:nth-child(3) { animation-delay: 0.3s; }
-.card:nth-child(4) { animation-delay: 0.4s; }
-.card:nth-child(5) { animation-delay: 0.5s; }
-
-@keyframes entryPop {
-    from { transform: translateY(100px) rotateX(20deg); opacity: 0; }
-    to { transform: translateY(0) rotateX(0); opacity: 1; }
 }
 
 .card-face {
@@ -166,6 +173,45 @@ body {
     border-radius: 50%;
     box-shadow: 0 0 10px #22c55e;
 }
+
+.santa-hat {
+    position: absolute;
+    top: -30px; 
+    right: -5px;
+    left: auto;
+    width: 0;
+    height: 0;
+    border-left: 22px solid transparent;
+    border-right: 22px solid transparent;
+    border-bottom: 45px solid #ef4444;
+    transform: translateZ(40px) rotate(20deg);
+    filter: drop-shadow(0 5px 5px rgba(0,0,0,0.3));
+    z-index: 50;
+    pointer-events: none;
+}
+.santa-hat::before {
+    content: '';
+    position: absolute;
+    top: -7px; 
+    left: -8px;
+    width: 16px;
+    height: 16px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 5px rgba(0,0,0,0.2);
+}
+.santa-hat::after {
+    content: '';
+    position: absolute;
+    top: 45px;
+    left: -26px;
+    width: 52px;
+    height: 14px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
 .profile-info { transform: translateZ(20px); width: 100%; }
 .profile-info h1 {
     font-size: 1.8rem; font-weight: 900;
