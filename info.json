@@ -1,7 +1,7 @@
 {
   "settings": {
     "newYearTimer": {
-      "enabled": true
+      "enabled": false
     }
   },
   "socials": {
@@ -25,7 +25,7 @@
       "role": "Владелец",
       "alert": {
         "enabled": true,
-        "text": "ПРОЕКТ СЕЙЧАС ЗАКРЫТ НА ВРЕМЯ",
+        "text": "ПРОЕКТ СЕЙЧАС ЗАКРЫТ НА ВРЕМЯ (тееест)",
         "icon": "fa-solid fa-circle-exclamation"
       },
       "links": [
