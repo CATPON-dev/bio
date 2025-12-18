@@ -1,39 +1,33 @@
 {
+  "settings": {
+    "newYearTimer": {
+      "enabled": true
+    }
+  },
   "socials": {
     "telegram": "https://t.me/EXPERT_CATPON",
     "github": "https://github.com/CATPON-dev",
     "email": "mailto:catpondev@gmail.com"
   },
   "stack": [
-    "Python",
-    "FastAPI",
-    "Aiogram",
-    "JavaScript",
-    "HTML/CSS",
-    "MySQL",
-    "SQLite",
-    "PHP"
+    "Python", "FastAPI", "Aiogram", "JavaScript", "HTML/CSS", "MySQL", "SQLite", "PHP"
   ],
   "hobbies": [
-    {
-      "name": "Аниме",
-      "icon": "fa-solid fa-tv"
-    },
-    {
-      "name": "Кодинг",
-      "icon": "fa-solid fa-terminal"
-    },
-    {
-      "name": "Музыка",
-      "icon": "fa-solid fa-music"
-    }
+    { "name": "Аниме", "icon": "fa-solid fa-tv" },
+    { "name": "Кодинг", "icon": "fa-solid fa-terminal" },
+    { "name": "Музыка", "icon": "fa-solid fa-music" }
   ],
   "projects": [
     {
       "name": "TeaHost",
-      "desc": "Хостинг юзерботов. (на данный момент закрыт)",
+      "desc": "Хостинг юзерботов.",
       "icon": "fa-solid fa-mug-hot",
       "role": "Владелец",
+      "alert": {
+        "enabled": true,
+        "text": "ПРОЕКТ СЕЙЧАС ЗАКРЫТ НА ВРЕМЯ",
+        "icon": "fa-solid fa-circle-exclamation"
+      },
       "links": [
         {"label": "Канал", "url": "https://t.me/TeaHostChannel"},
         {"label": "Статус", "url": "https://t.me/TeaHostStatus"},
@@ -54,7 +48,7 @@
       "name": "Legion-Panel",
       "desc": "Сайт предоставляет панель-управление для своего ПО.",
       "icon": "fa-solid fa-shield-halved",
-       "role": "Со-владелец",
+      "role": "Со-владелец",
       "links": [
         {"label": "Сайт", "url": "https://legionpanel.site/"},
         {"label": "Канал", "url": "https://t.me/LegionPanel"}
