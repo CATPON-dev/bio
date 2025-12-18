@@ -2,138 +2,104 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CATPON | Developer</title>
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>CATPON | Bio</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="style.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        bgMain: '#0c0c0e',
+                        cardFace: '#161618',
+                        accent: '#3b82f6',
+                    }
+                }
+            }
+        }
+    </script>
 </head>
-<body class="loading">
+<body class="loading bg-bgMain text-white font-['Inter'] overflow-x-hidden antialiased">
     
-    <div id="loader" class="loader-overlay">
-        <div class="cube-loader">
-            <div class="side front"></div>
-            <div class="side back"></div>
-            <div class="side right"></div>
-            <div class="side left"></div>
-            <div class="side top"></div>
-            <div class="side bottom"></div>
-        </div>
-        <p>LOADING...</p>
+    <div id="loader" class="fixed inset-0 w-full h-full bg-bgMain z-[100] flex flex-col justify-center items-center transition-all duration-500">
+        <div class="w-12 h-12 border-4 border-accent border-t-transparent rounded-full animate-spin"></div>
+        <p class="mt-4 text-xs font-bold tracking-widest text-accent uppercase">Loading System</p>
     </div>
 
-    <div class="background-3d">
-        <div class="cube cube-1">
-            <div class="face front"></div>
-            <div class="face back"></div>
-            <div class="face right"></div>
-            <div class="face left"></div>
-            <div class="face top"></div>
-            <div class="face bottom"></div>
-        </div>
-        <div class="cube cube-2">
-            <div class="face front"></div>
-            <div class="face back"></div>
-            <div class="face right"></div>
-            <div class="face left"></div>
-            <div class="face top"></div>
-            <div class="face bottom"></div>
-        </div>
-        <div class="cube cube-3">
-            <div class="face front"></div>
-            <div class="face back"></div>
-            <div class="face right"></div>
-            <div class="face left"></div>
-            <div class="face top"></div>
-            <div class="face bottom"></div>
-        </div>
-    </div>
+    <div class="fixed inset-0 -z-10 bg-[radial-gradient(circle_at_50%_0%,#1a1a20_0%,#000_100%)]"></div>
 
-    <main class="container" id="main-container">
-        <section class="card profile-card tilt-effect">
-            <div class="card-face">
-                <div class="avatar-holder">
-                    <div class="santa-hat"></div>
-                    <img id="profile-avatar" src="https://ui-avatars.com/api/?name=CP&background=3b82f6&color=fff&size=128" alt="Avatar" class="avatar-img">
-                    <div class="status-indicator"></div>
+    <main id="main-container" class="opacity-0 transition-opacity duration-700 w-full max-w-[500px] mx-auto p-4 md:pt-12 space-y-6">
+        
+        <section class="bg-cardFace rounded-[28px] p-6 border border-white/5 shadow-2xl relative overflow-hidden">
+            <div class="flex flex-col sm:flex-row items-center gap-6 relative z-10">
+                <div class="relative">
+                    <div class="santa-hat absolute -top-6 -right-2 z-20 w-8 h-8"></div>
+                    <img id="profile-avatar" src="https://ui-avatars.com/api/?name=CP&background=3b82f6" class="w-24 h-24 rounded-full border-4 border-white/5 object-cover">
+                    <div class="absolute bottom-1 right-1 w-6 h-6 bg-green-500 border-4 border-cardFace rounded-full shadow-lg"></div>
                 </div>
-                <div class="profile-info">
-                    <h1 id="profile-name">CATPON</h1>
-                    <p class="role" id="profile-desc">Loading...</p>
-                    
-                    <div class="social-row">
-                        <a id="link-tg" href="#" target="_blank" class="btn-3d telegram">
+                <div class="text-center sm:text-left flex-1">
+                    <h1 id="profile-name" class="text-2xl md:text-3xl font-black mb-1">CATPON</h1>
+                    <p id="profile-desc" class="text-accent text-sm font-bold uppercase tracking-wider mb-4">Loading profile...</p>
+                    <div class="flex justify-center sm:justify-start gap-3">
+                        <a id="link-tg" href="#" target="_blank" class="w-10 h-10 bg-white/5 rounded-xl flex items-center justify-center hover:bg-accent transition-colors">
                             <i class="fa-brands fa-telegram"></i>
-                            <span class="btn-shadow"></span>
                         </a>
-                        <a id="link-gh" href="#" target="_blank" class="btn-3d github">
+                        <a id="link-gh" href="#" target="_blank" class="w-10 h-10 bg-white/5 rounded-xl flex items-center justify-center hover:bg-accent transition-colors">
                             <i class="fa-brands fa-github"></i>
-                            <span class="btn-shadow"></span>
-                        </a>
-                        <a id="link-mail" href="#" class="btn-3d email">
-                            <i class="fa-solid fa-envelope"></i>
-                            <span class="btn-shadow"></span>
                         </a>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="card skills-card tilt-effect">
-            <div class="card-face">
-                <h2 class="floating-title"><i class="fa-solid fa-layer-group"></i> Tech Stack</h2>
-                <div class="tags" id="stack-container">
-                </div>
+        <section class="bg-cardFace rounded-[28px] p-6 border border-white/5">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="h-px flex-1 bg-white/10"></div>
+                <h2 class="text-[10px] font-black text-gray-500 uppercase tracking-[0.3em]">Technics</h2>
+                <div class="h-px flex-1 bg-white/10"></div>
             </div>
+            <div id="stack-container" class="flex flex-wrap justify-center gap-2"></div>
         </section>
 
-        <section class="card hobby-card tilt-effect">
-            <div class="card-face">
-                <h2 class="floating-title"><i class="fa-regular fa-star"></i> Хобби</h2>
-                <div class="hobby-table" id="hobbies-container">
-                </div>
-            </div>
+        <section class="bg-cardFace rounded-[28px] p-6 border border-white/5">
+            <h2 class="text-xl font-black mb-6">Active Projects</h2>
+            <div id="projects-container" class="space-y-4"></div>
         </section>
 
-        <section class="card projects-card full-width tilt-effect">
-            <div class="card-face">
-                <h2 class="floating-title"><i class="fa-solid fa-folder-open"></i> Проекты</h2>
-                <div class="project-grid" id="projects-container">
-                </div>
-            </div>
-        </section>
-
-        <section class="card timer-card full-width tilt-effect" id="timer-card">
-            <div class="card-face">
-                <div class="timer-header">
-                    <h2 class="floating-title"><i class="fa-solid fa-hourglass-half"></i> До НГ</h2>
-                    <div class="copy-btn-3d" id="copy-feedback">
-                        <i class="fa-regular fa-copy"></i>
+        <section id="timer-card" class="bg-accent rounded-[28px] p-px group cursor-pointer">
+            <div class="bg-cardFace rounded-[27px] p-6">
+                <div class="flex flex-col gap-6">
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs font-black uppercase tracking-widest text-gray-500">NY Countdown</span>
+                        <div id="copy-feedback" class="text-gray-500 hover:text-white transition-colors">
+                            <i class="fa-regular fa-copy"></i>
+                        </div>
                     </div>
-                </div>
-                
-                <div class="timer-display-3d">
-                    <div class="digit-box">
-                        <span id="d" class="time-num">00</span>
-                        <span class="time-label">ДН</span>
-                    </div>
-                    <div class="separator">:</div>
-                    <div class="digit-box">
-                        <span id="h" class="time-num">00</span>
-                        <span class="time-label">ЧАС</span>
-                    </div>
-                    <div class="separator">:</div>
-                    <div class="digit-box">
-                        <span id="m" class="time-num">00</span>
-                        <span class="time-label">МИН</span>
-                    </div>
-                    <div class="separator">:</div>
-                    <div class="digit-box accent-digit">
-                        <span id="s" class="time-num">00</span>
-                        <span class="time-label">СЕК</span>
+                    <div class="flex justify-between items-center px-2">
+                        <div class="text-center">
+                            <div id="d" class="text-3xl font-black">00</div>
+                            <div class="text-[8px] font-bold text-gray-600 uppercase">Days</div>
+                        </div>
+                        <div class="text-xl font-black text-white/10">:</div>
+                        <div class="text-center">
+                            <div id="h" class="text-3xl font-black">00</div>
+                            <div class="text-[8px] font-bold text-gray-600 uppercase">Hours</div>
+                        </div>
+                        <div class="text-xl font-black text-white/10">:</div>
+                        <div class="text-center">
+                            <div id="m" class="text-3xl font-black">00</div>
+                            <div class="text-[8px] font-bold text-gray-600 uppercase">Min</div>
+                        </div>
+                        <div class="text-xl font-black text-white/10">:</div>
+                        <div class="text-center">
+                            <div id="s" class="text-3xl font-black text-accent">00</div>
+                            <div class="text-[8px] font-bold text-gray-600 uppercase text-accent">Sec</div>
+                        </div>
                     </div>
                 </div>
             </div>

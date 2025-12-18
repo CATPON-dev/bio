@@ -1,218 +1,139 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const targetUsername = 'EXPERT_CATPON';
-    const profileApiUrl = `https://api.catpon.online/get-info?username=${targetUsername}`;
-    const githubApiUrl = 'https://api.github.com/repos/CATPON-dev/bio/contents/info.json?ref=main';
+    const config = {
+        username: 'EXPERT_CATPON',
+        api: `https://api.catpon.online/get-info?username=`,
+        github: 'https://api.github.com/repos/CATPON-dev/bio/contents/info.json?ref=main'
+    };
 
-    const loader = document.getElementById('loader');
-    const mainContainer = document.getElementById('main-container');
-    const nameEl = document.getElementById('profile-name');
-    const descEl = document.getElementById('profile-desc');
-    const avatarEl = document.getElementById('profile-avatar');
+    const DOM = {
+        loader: document.getElementById('loader'),
+        main: document.getElementById('main-container'),
+        name: document.getElementById('profile-name'),
+        desc: document.getElementById('profile-desc'),
+        avatar: document.getElementById('profile-avatar'),
+        stack: document.getElementById('stack-container'),
+        projects: document.getElementById('projects-container'),
+        timerCard: document.getElementById('timer-card'),
+        timer: { d: document.getElementById('d'), h: document.getElementById('h'), m: document.getElementById('m'), s: document.getElementById('s') },
+        copy: document.getElementById('copy-feedback')
+    };
 
-    const tgLink = document.getElementById('link-tg');
-    const ghLink = document.getElementById('link-gh');
-    const mailLink = document.getElementById('link-mail');
-    
-    const stackContainer = document.getElementById('stack-container');
-    const hobbiesContainer = document.getElementById('hobbies-container');
-    const projectsContainer = document.getElementById('projects-container');
+    const safe = (s) => {
+        const d = document.createElement('div');
+        d.textContent = s;
+        return d.innerHTML;
+    };
 
-    function decodeBase64UTF8(base64) {
+    const decode = (b) => {
+        try { return new TextDecoder().decode(Uint8Array.from(atob(b.replace(/\s/g, '')), c => c.charCodeAt(0))); }
+        catch (e) { return null; }
+    };
+
+    async function init() {
         try {
-            const cleanBase64 = base64.replace(/\s/g, '');
-            const binaryString = window.atob(cleanBase64);
-            const bytes = new Uint8Array(binaryString.length);
-            for (let i = 0; i < binaryString.length; i++) {
-                bytes[i] = binaryString.charCodeAt(i);
-            }
-            return new TextDecoder().decode(bytes);
-        } catch (e) {
-            console.error(e);
-            return null;
-        }
-    }
+            const [pRes, gRes] = await Promise.allSettled([
+                fetch(config.api + config.username).then(r => r.json()),
+                fetch(config.github, { cache: "no-store" }).then(r => r.json())
+            ]);
 
-    async function loadAllData() {
-        try {
-            fetch(profileApiUrl)
-                .then(res => res.json())
-                .then(data => {
-                    if (data.nickname) nameEl.innerText = data.nickname;
-                    if (data.description) descEl.innerText = data.description;
-                    if (data.photo) avatarEl.src = data.photo;
-                })
-                .catch(err => console.error(err));
-
-            const ghResponse = await fetch(githubApiUrl, {
-                cache: "no-store"
-            });
-
-            if (ghResponse.ok) {
-                const ghData = await ghResponse.json();
-                
-                if (ghData.content) {
-                    const decodedString = decodeBase64UTF8(ghData.content);
-                    
-                    if (decodedString) {
-                        const config = JSON.parse(decodedString);
-                        applyConfig(config);
-                    }
-                }
+            let githubData = null;
+            if (gRes.status === 'fulfilled' && gRes.value.content) {
+                githubData = JSON.parse(decode(gRes.value.content));
             }
 
-        } catch (error) {
-            console.error(error);
+            if (pRes.status === 'fulfilled') {
+                const d = pRes.value;
+                DOM.name.textContent = d.nickname || 'CATPON';
+                DOM.desc.textContent = d.description || 'Developer';
+                if (d.photo) DOM.avatar.src = d.photo;
+            }
+
+            if (githubData) render(githubData);
+
         } finally {
+            DOM.loader.style.opacity = '0';
             setTimeout(() => {
-                loader.classList.add('hidden');
+                DOM.loader.style.display = 'none';
                 document.body.classList.remove('loading');
-                mainContainer.classList.add('loaded');
+                DOM.main.classList.add('loaded');
             }, 500);
         }
     }
 
-    function applyConfig(config) {
-        if (config.socials) {
-            if (config.socials.telegram) tgLink.href = config.socials.telegram;
-            if (config.socials.github) ghLink.href = config.socials.github;
-            if (config.socials.email) mailLink.href = config.socials.email;
+    function render(cfg) {
+        if (cfg.settings && cfg.settings.newYearTimer) {
+            if (cfg.settings.newYearTimer.enabled === false) {
+                DOM.timerCard.classList.add('hidden');
+            } else {
+                startTimer();
+            }
+        } else {
+            startTimer();
         }
 
-        if (config.stack && Array.isArray(config.stack)) {
-            stackContainer.innerHTML = '';
-            config.stack.forEach(tech => {
-                const span = document.createElement('span');
-                span.className = 'tag-3d';
-                span.textContent = tech;
-                stackContainer.appendChild(span);
-            });
+        if (cfg.stack) {
+            DOM.stack.innerHTML = cfg.stack.map(s => `
+                <span class="bg-white/5 border border-white/10 px-3 py-1.5 rounded-xl text-[11px] font-bold text-gray-300">
+                    ${safe(s)}
+                </span>
+            `).join('');
         }
 
-        if (config.hobbies && Array.isArray(config.hobbies)) {
-            hobbiesContainer.innerHTML = '';
-            config.hobbies.forEach(hobby => {
-                const div = document.createElement('div');
-                div.className = 'hobby-block';
-                div.innerHTML = `
-                    <div class="icon-box"><i class="${hobby.icon}"></i></div>
-                    <span>${hobby.name}</span>
-                `;
-                hobbiesContainer.appendChild(div);
-            });
-        }
-
-        if (config.projects && Array.isArray(config.projects)) {
-            projectsContainer.innerHTML = '';
-            config.projects.forEach(proj => {
-                const article = document.createElement('article');
-                article.className = 'project-block';
-                
-                let linksHtml = '';
-                if (proj.links && Array.isArray(proj.links)) {
-                    proj.links.forEach(link => {
-                        linksHtml += `<a href="${link.url}" target="_blank" class="link-3d">${link.label}</a>`;
-                    });
-                }
-
-                article.innerHTML = `
-                    <div class="project-header">
-                        <div class="project-icon-3d"><i class="${proj.icon}"></i></div>
-                        <h3>${proj.name}</h3>
+        if (cfg.projects) {
+            DOM.projects.innerHTML = cfg.projects.map(p => `
+                <div class="project-item">
+                    <div class="flex items-start justify-between mb-3">
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 bg-accent/10 rounded-xl flex items-center justify-center text-accent">
+                                <i class="${safe(p.icon)}"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-base">${safe(p.name)}</h3>
+                                ${p.role ? `<span class="text-[9px] bg-accent/20 text-accent px-2 py-0.5 rounded-md font-black uppercase tracking-tighter">${safe(p.role)}</span>` : ''}
+                            </div>
+                        </div>
                     </div>
-                    <p>${proj.desc}</p>
-                    <div class="project-actions">
-                        ${linksHtml}
+                    
+                    <p class="text-xs text-gray-500 mb-2 leading-relaxed">${safe(p.desc)}</p>
+                    
+                    ${p.alert && p.alert.enabled ? `
+                        <div class="bg-red-500/10 border border-red-500/20 p-2 rounded-lg mb-4 text-[10px] text-red-400 font-bold flex items-center gap-2">
+                            <i class="${safe(p.alert.icon || 'fa-solid fa-circle-exclamation')} animate-pulse"></i>
+                            ${safe(p.alert.text)}
+                        </div>
+                    ` : ''}
+
+                    <div class="flex gap-2">
+                        ${(p.links || []).map(l => `<a href="${l.url}" target="_blank" class="text-[10px] font-black uppercase bg-accent px-3 py-1.5 rounded-lg transition-transform active:scale-95">${safe(l.label)}</a>`).join('')}
                     </div>
-                `;
-                projectsContainer.appendChild(article);
-            });
+                </div>
+            `).join('');
         }
     }
 
-    loadAllData();
-
-    const elD = document.getElementById('d');
-    const elH = document.getElementById('h');
-    const elM = document.getElementById('m');
-    const elS = document.getElementById('s');
-    const card = document.getElementById('timer-card');
-    const copyBtn = document.getElementById('copy-feedback');
-
-    let copyText = "";
-
-    function updateTimer() {
-        const now = new Date();
-        const currentYear = now.getFullYear();
-        const nextYear = new Date(currentYear + 1, 0, 1);
-        const diff = nextYear - now;
-
-        if (diff <= 0) {
-            elD.innerText = "00"; elH.innerText = "00";
-            elM.innerText = "00"; elS.innerText = "00";
-            return;
+    function startTimer() {
+        let text = "";
+        const update = () => {
+            const diff = new Date(new Date().getFullYear() + 1, 0, 1) - new Date();
+            if (diff <= 0) return;
+            const d = Math.floor(diff / 86400000), h = Math.floor((diff / 3600000) % 24), m = Math.floor((diff / 60000) % 60), s = Math.floor((diff / 1000) % 60);
+            const p = n => n.toString().padStart(2, '0');
+            if (DOM.timer.d) {
+                DOM.timer.d.innerText = p(d); DOM.timer.h.innerText = p(h);
+                DOM.timer.m.innerText = p(m); DOM.timer.s.innerText = p(s);
+            }
+            text = `${d}d ${h}h ${m}m ${s}s`;
+        };
+        setInterval(update, 1000); update();
+        if (DOM.copy) {
+            DOM.copy.onclick = (e) => {
+                e.stopPropagation();
+                navigator.clipboard.writeText(text);
+                const i = DOM.copy.querySelector('i'); i.className = 'fa-solid fa-check text-green-500';
+                setTimeout(() => i.className = 'fa-regular fa-copy', 2000);
+            };
         }
-
-        const d = Math.floor(diff / 1000 / 60 / 60 / 24);
-        const h = Math.floor(diff / 1000 / 60 / 60) % 24;
-        const m = Math.floor(diff / 1000 / 60) % 60;
-        const s = Math.floor(diff / 1000) % 60;
-
-        const fd = d < 10 ? '0' + d : d;
-        const fh = h < 10 ? '0' + h : h;
-        const fm = m < 10 ? '0' + m : m;
-        const fs = s < 10 ? '0' + s : s;
-
-        if(elD) elD.innerText = fd;
-        if(elH) elH.innerText = fh;
-        if(elM) elM.innerText = fm;
-        if(elS) elS.innerText = fs;
-
-        copyText = `${fd}д ${fh}ч ${fm}м ${fs}с`;
     }
 
-    setInterval(updateTimer, 1000);
-    updateTimer();
-
-    if (card) {
-        card.addEventListener('click', (e) => {
-            if (e.target.closest('a')) return;
-            if (!navigator.clipboard) return;
-            
-            navigator.clipboard.writeText(copyText).then(() => {
-                const icon = copyBtn.querySelector('i');
-                const oldClass = icon.className;
-                icon.className = 'fa-solid fa-check';
-                copyBtn.classList.add('success');
-                setTimeout(() => {
-                    icon.className = oldClass;
-                    copyBtn.classList.remove('success');
-                }, 1000);
-            }).catch(err => console.error(err));
-        });
-    }
-
-    const cards = document.querySelectorAll('.tilt-effect');
-    if (window.matchMedia("(min-width: 769px)").matches) {
-        cards.forEach(card => {
-            card.addEventListener('mousemove', (e) => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                const centerX = rect.width / 2;
-                const centerY = rect.height / 2;
-                const rotateX = ((y - centerY) / centerY) * -10;
-                const rotateY = ((x - centerX) / centerX) * 10;
-                const cardFace = card.querySelector('.card-face');
-                if(cardFace) {
-                    card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-                }
-            });
-            card.addEventListener('mouseleave', () => {
-                const cardFace = card.querySelector('.card-face');
-                if(cardFace) {
-                    card.style.transform = `rotateX(0) rotateY(0)`;
-                }
-            });
-        });
-    }
+    init();
 });
