@@ -35,6 +35,16 @@
       ]
     },
     {
+      "name": "Hysteria-Host",
+      "desc": "Хостинг юзерботов.",
+      "icon": "fa-solid fa-server",
+      "role": "Со-владелец",
+      "links": [
+        {"label": "Канал", "url": "https://t.me/hysteriahost"},
+        {"label": "Чат", "url": "https://t.me/hysteria_talks"}
+      ]
+    },
+    {
       "name": "MDK-Panels",
       "desc": "Сайт предоставляет панель-управление для своего ПО.",
       "icon": "fa-solid fa-gauge-high",
