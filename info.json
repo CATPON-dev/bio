@@ -33,6 +33,7 @@
       "name": "TeaHost",
       "desc": "Хостинг юзерботов. (на данный момент закрыт)",
       "icon": "fa-solid fa-mug-hot",
+      "role": "Владелец",
       "links": [
         {"label": "Канал", "url": "https://t.me/TeaHostChannel"},
         {"label": "Статус", "url": "https://t.me/TeaHostStatus"},
@@ -43,6 +44,7 @@
       "name": "MDK-Panels",
       "desc": "Сайт предоставляет панель-управление для своего ПО.",
       "icon": "fa-solid fa-gauge-high",
+      "role": "Владелец",
       "links": [
         {"label": "Сайт", "url": "https://modkey.space"},
         {"label": "Канал", "url": "https://t.me/mdk_space"}
@@ -52,6 +54,7 @@
       "name": "Legion-Panel",
       "desc": "Сайт предоставляет панель-управление для своего ПО.",
       "icon": "fa-solid fa-shield-halved",
+       "role": "Со-владелец",
       "links": [
         {"label": "Сайт", "url": "https://legionpanel.site/"},
         {"label": "Канал", "url": "https://t.me/LegionPanel"}
